@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reset Password • Instagram</title>
+  <style>
+    :root {
+      --ig-primary: #0095f6;
+      --ig-primary-hover: #1877f2;
+      --ig-error: #ed4956;
+      --ig-border: #dbdbdb;
+      --ig-background: #fafafa;
+      --ig-text: #262626;
+      --ig-secondary-text: #8e8e8e;
+      --apple-bg: #fbfbfd;
+      --github-radius: 6px;
+      --card-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      --neon-color: #00f2ff;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    body {
+      background-color: var(--apple-bg);
+      color: var(--ig-text);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 20px;
+      background-image: linear-gradient(to bottom right, #fbfbfd, #f5f5f7);
+    }
+
+    .container {
+      max-width: 420px;
+      width: 100%;
+    }
+
+    .card {
+      background-color: white;
+      border: none;
+      border-radius: var(--github-radius);
+      padding: 32px 40px;
+      margin-bottom: 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      box-shadow: var(--card-shadow);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+    }
+
+    .logo {
+      margin: 22px auto 12px;
+      display: block;
+    }
+
+    .lock-icon {
+      font-size: 64px;
+      margin: 20px auto;
+      color: #262626;
+      background: linear-gradient(135deg, #515BD4, #8134AF, #DD2A7B);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    h1 {
+      font-size: 24px;
+      font-weight: 600;
+      text-align: center;
+      margin-bottom: 16px;
+      background: linear-gradient(90deg, #515BD4, #8134AF, #DD2A7B);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    p {
+      color: var(--ig-secondary-text);
+      font-size: 15px;
+      text-align: center;
+      margin-bottom: 24px;
+      line-height: 1.5;
+    }
+
+    form {
+      width: 100%;
+    }
+
+    .form-group {
+      position: relative;
+      margin-bottom: 16px;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px 16px;
+      background: var(--apple-bg);
+      border: 1px solid var(--ig-border);
+      border-radius: var(--github-radius);
+      font-size: 15px;
+      color: var(--ig-text);
+      transition: all 0.2s ease;
+    }
+
+    input:focus {
+      outline: none;
+      border-color: var(--ig-primary);
+      box-shadow: 0 0 0 3px rgba(0, 149, 246, 0.15);
+    }
+
+    .error-message {
+      color: var(--ig-error);
+      font-size: 13px;
+      margin-top: 8px;
+      display: none;
+      animation: fadeIn 0.3s;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px 16px;
+      background: linear-gradient(90deg, #515BD4, #8134AF, #DD2A7B);
+      color: white;
+      border: none;
+      border-radius: var(--github-radius);
+      font-size: 15px;
+      font-weight: 600;
+      margin-top: 16px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    button:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: all 0.6s ease;
+    }
+
+    button:hover:before {
+      left: 100%;
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 149, 246, 0.3);
+    }
+
+    button:disabled {
+      background: linear-gradient(90deg, #8c8cd9, #a787b6, #dd8ba9);
+      transform: none;
+      box-shadow: none;
+      cursor: default;
+    }
+
+    .loader {
+      display: none;
+      width: 20px;
+      height: 20px;
+      border: 2px solid rgba(255,255,255,0.3);
+      border-radius: 50%;
+      border-top: 2px solid white;
+      animation: spin 1s linear infinite;
+      position: absolute;
+      right: 45%;
+      top: 11px;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .or-divider {
+      display: flex;
+      align-items: center;
+      margin: 24px 0;
+      width: 100%;
+    }
+
+    .or-divider span {
+      color: var(--ig-secondary-text);
+      font-size: 14px;
+      font-weight: 500;
+      margin: 0 18px;
+    }
+
+    .or-divider::before, .or-divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background-color: var(--ig-border);
+    }
+
+    .create-account {
+      color: #1877F2;
+      font-size: 15px;
+      font-weight: 600;
+      text-decoration: none;
+      padding: 12px 0;
+      display: block;
+      text-align: center;
+      border-radius: var(--github-radius);
+      border: 1px solid #1877F2;
+      transition: all 0.3s ease;
+    }
+
+    .create-account:hover {
+      background-color: rgba(24, 119, 242, 0.1);
+    }
+
+    .login-link {
+      display: block;
+      text-align: center;
+      padding: 16px;
+      font-size: 15px;
+      color: var(--ig-text);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .login-link:hover {
+      color: var(--ig-primary);
+    }
+
+    .links {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 24px;
+    }
+
+    .links a {
+      color: var(--ig-secondary-text);
+      font-size: 13px;
+      text-decoration: none;
+      margin: 8px;
+      transition: color 0.2s ease;
+    }
+
+    .links a:hover {
+      color: var(--ig-text);
+    }
+
+    .success-message {
+      display: none;
+      background-color: rgba(52, 168, 83, 0.1);
+      border-radius: var(--github-radius);
+      padding: 20px;
+      margin-top: 24px;
+      animation: fadeIn 0.5s;
+      width: 100%;
+      border-left: 4px solid #34a853;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .success-icon {
+      color: #34a853;
+      font-size: 20px;
+      margin-right: 8px;
+      vertical-align: middle;
+    }
+
+    .success-title {
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: #34a853;
+    }
+
+    .instagram-gradient {
+      background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-size: 48px;
+      font-family: 'Instagram', sans-serif;
+      font-weight: bold;
+      margin-bottom: 16px;
+    }
+
+    .credits-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 30px;
+    }
+
+    .credits {
+      font-size: 14px;
+      color: #fff;
+      text-align: center;
+      font-weight: bold;
+      padding: 10px 20px;
+      border-radius: var(--github-radius);
+      background: rgba(0, 0, 0, 0.8);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .neon-text {
+      color: #fff;
+      text-shadow: 
+        0 0 5px var(--neon-color),
+        0 0 10px var(--neon-color),
+        0 0 20px var(--neon-color),
+        0 0 40px var(--neon-color);
+      animation: neon-glow 1.5s ease-in-out infinite alternate;
+    }
+    
+    @keyframes neon-glow {
+      from {
+        text-shadow: 
+          0 0 5px var(--neon-color),
+          0 0 10px var(--neon-color),
+          0 0 20px var(--neon-color),
+          0 0 30px var(--neon-color);
+      }
+      to {
+        text-shadow: 
+          0 0 10px var(--neon-color),
+          0 0 20px var(--neon-color),
+          0 0 30px var(--neon-color),
+          0 0 40px var(--neon-color);
+      }
+    }
+
+    @media (max-width: 450px) {
+      .card {
+        padding: 24px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="card">
+      <div class="instagram-gradient">Instagram</div>
+      <div class="lock-icon">🔒</div>
+      <h1>Trouble logging in?</h1>
+      <p>Enter your email, phone, or username and we'll send you a link to get back into your account.</p>
+      
+      <form id="resetForm">
+        <div class="form-group">
+          <input type="text" id="emailOrUsername" placeholder="Email, Phone, or Username" required>
+          <div class="error-message" id="emailError">Please enter a valid email, phone number or username.</div>
+        </div>
+        
+        <button type="submit" id="resetButton">
+          <span id="buttonText">Send Login Link</span>
+          <span class="loader" id="loader"></span>
+        </button>
+        
+        <div class="or-divider">
+          <span>OR</span>
+        </div>
+        
+        <a href="https://www.facebook.com/signup" class="create-account" target="_blank">Create a Facebook account</a>
+      </form>
+      
+      <div class="success-message" id="successMessage">
+        <div class="success-title"><span class="success-icon">✓</span> Email Sent Successfully</div>
+        <p>We sent an email to your email address with a link to get back into your account.</p>
+      </div>
+    </div>
+    
+    <div class="card">
+      <a href="#" class="login-link">Back to Login</a>
+    </div>
+    
+    <div class="links">
+      <a href="#">About</a>
+      <a href="#">Blog</a>
+      <a href="#">Jobs</a>
+      <a href="#">Help</a>
+      <a href="#">Privacy</a>
+      <a href="#">Terms</a>
+    </div>
+    
+    <div class="credits-container">
+      <div class="credits">
+        <span class="neon-text">made by @2623 - Ali Al-sharif</span>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const form = document.getElementById('resetForm');
+      const emailInput = document.getElementById('emailOrUsername');
+      const emailError = document.getElementById('emailError');
+      const resetButton = document.getElementById('resetButton');
+      const buttonText = document.getElementById('buttonText');
+      const loader = document.getElementById('loader');
+      const successMessage = document.getElementById('successMessage');
+
+      // Set button disabled by default
+      resetButton.disabled = true;
+
+      // Enable/disable button based on input
+      emailInput.addEventListener('input', function() {
+        resetButton.disabled = emailInput.value.trim() === '';
+        emailError.style.display = 'none';
+      });
+
+      // Form submission handling
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const value = emailInput.value.trim();
+        
+        // Basic validation
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const phoneRegex = /^[0-9+\s()-]{7,20}$/;
+        const usernameRegex = /^[a-zA-Z0-9._]{1,30}$/;
+        
+        if (!emailRegex.test(value) && !phoneRegex.test(value) && !usernameRegex.test(value)) {
+          emailError.style.display = 'block';
+          return;
+        }
+        
+        // Show loading state
+        buttonText.style.opacity = '0';
+        loader.style.display = 'block';
+        resetButton.disabled = true;
+        
+        // Simulate API call
+        setTimeout(function() {
+          try {
+            // Mock API call to the Instagram password reset endpoint
+            fetch('https://i.instagram.com/api/v1/accounts/send_password_reset/', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({
+                user_email: value,
+                guid: generateGuid(),

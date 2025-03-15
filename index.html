@@ -5,455 +5,215 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Reset Password • Instagram</title>
   <style>
-    :root {
-      --ig-primary: #0095f6;
-      --ig-primary-hover: #1877f2;
-      --ig-error: #ed4956;
-      --ig-border: #dbdbdb;
-      --ig-background: #fafafa;
-      --ig-text: #262626;
-      --ig-secondary-text: #8e8e8e;
-      --apple-bg: #fbfbfd;
-      --github-radius: 6px;
-      --card-shadow: 0 4px 20px rgba(0,0,0,0.1);
-      --neon-color: #00f2ff;
-    }
-
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     }
-
+    
     body {
-      background-color: var(--apple-bg);
-      color: var(--ig-text);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh;
-      padding: 20px;
-      background-image: linear-gradient(to bottom right, #fbfbfd, #f5f5f7);
-    }
-
-    .container {
-      max-width: 420px;
-      width: 100%;
-    }
-
-    .card {
-      background-color: white;
-      border: none;
-      border-radius: var(--github-radius);
-      padding: 32px 40px;
-      margin-bottom: 16px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      box-shadow: var(--card-shadow);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .card:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 30px rgba(0,0,0,0.12);
-    }
-
-    .logo {
-      margin: 22px auto 12px;
-      display: block;
-    }
-
-    .lock-icon {
-      font-size: 64px;
-      margin: 20px auto;
+      background-color: #fafafa;
       color: #262626;
-      background: linear-gradient(135deg, #515BD4, #8134AF, #DD2A7B);
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
+      font-size: 14px;
+      line-height: 18px;
     }
-
-    h1 {
-      font-size: 24px;
-      font-weight: 600;
-      text-align: center;
+    
+    .container {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      align-items: center;
+      justify-content: space-between;
+    }
+    
+    .main-content {
+      width: 100%;
+      max-width: 388px;
+      margin: 32px auto;
+      padding: 0 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex: 1;
+    }
+    
+    .logo {
+      margin-bottom: 32px;
+    }
+    
+    .card {
+      background-color: #fff;
+      border: 1px solid #dbdbdb;
+      border-radius: 3px;
+      padding: 24px;
+      width: 100%;
       margin-bottom: 16px;
-      background: linear-gradient(90deg, #515BD4, #8134AF, #DD2A7B);
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
     }
-
-    p {
-      color: var(--ig-secondary-text);
-      font-size: 15px;
+    
+    .header {
       text-align: center;
       margin-bottom: 24px;
-      line-height: 1.5;
     }
-
-    form {
-      width: 100%;
+    
+    .header h1 {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 12px;
     }
-
+    
+    .header p {
+      color: #8e8e8e;
+      font-size: 14px;
+      line-height: 18px;
+    }
+    
     .form-group {
-      position: relative;
       margin-bottom: 16px;
     }
-
+    
     input {
       width: 100%;
-      padding: 12px 16px;
-      background: var(--apple-bg);
-      border: 1px solid var(--ig-border);
-      border-radius: var(--github-radius);
-      font-size: 15px;
-      color: var(--ig-text);
-      transition: all 0.2s ease;
+      padding: 9px 8px;
+      background-color: #fafafa;
+      border: 1px solid #dbdbdb;
+      border-radius: 3px;
+      font-size: 12px;
     }
-
+    
     input:focus {
       outline: none;
-      border-color: var(--ig-primary);
-      box-shadow: 0 0 0 3px rgba(0, 149, 246, 0.15);
+      border-color: #a8a8a8;
     }
-
-    .error-message {
-      color: var(--ig-error);
-      font-size: 13px;
-      margin-top: 8px;
-      display: none;
-      animation: fadeIn 0.3s;
-    }
-
+    
     button {
       width: 100%;
-      padding: 12px 16px;
-      background: linear-gradient(90deg, #515BD4, #8134AF, #DD2A7B);
-      color: white;
+      background-color: #0095f6;
       border: none;
-      border-radius: var(--github-radius);
-      font-size: 15px;
+      border-radius: 4px;
+      color: #fff;
       font-weight: 600;
-      margin-top: 16px;
+      padding: 8px 0;
       cursor: pointer;
-      transition: all 0.3s ease;
-      position: relative;
-      overflow: hidden;
     }
-
-    button:before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-      transition: all 0.6s ease;
-    }
-
-    button:hover:before {
-      left: 100%;
-    }
-
-    button:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(0, 149, 246, 0.3);
-    }
-
+    
     button:disabled {
-      background: linear-gradient(90deg, #8c8cd9, #a787b6, #dd8ba9);
-      transform: none;
-      box-shadow: none;
-      cursor: default;
+      opacity: 0.5;
+      cursor: not-allowed;
     }
-
-    .loader {
-      display: none;
-      width: 20px;
-      height: 20px;
-      border: 2px solid rgba(255,255,255,0.3);
-      border-radius: 50%;
-      border-top: 2px solid white;
-      animation: spin 1s linear infinite;
-      position: absolute;
-      right: 45%;
-      top: 11px;
-    }
-
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
-
-    .or-divider {
+    
+    .divider {
       display: flex;
       align-items: center;
-      margin: 24px 0;
-      width: 100%;
+      margin: 16px 0;
     }
-
-    .or-divider span {
-      color: var(--ig-secondary-text);
-      font-size: 14px;
-      font-weight: 500;
-      margin: 0 18px;
-    }
-
-    .or-divider::before, .or-divider::after {
-      content: '';
+    
+    .divider::before,
+    .divider::after {
+      content: "";
       flex: 1;
-      height: 1px;
-      background-color: var(--ig-border);
+      border-top: 1px solid #dbdbdb;
     }
-
-    .create-account {
-      color: #1877F2;
-      font-size: 15px;
-      font-weight: 600;
-      text-decoration: none;
-      padding: 12px 0;
-      display: block;
-      text-align: center;
-      border-radius: var(--github-radius);
-      border: 1px solid #1877F2;
-      transition: all 0.3s ease;
-    }
-
-    .create-account:hover {
-      background-color: rgba(24, 119, 242, 0.1);
-    }
-
-    .login-link {
-      display: block;
-      text-align: center;
-      padding: 16px;
-      font-size: 15px;
-      color: var(--ig-text);
-      text-decoration: none;
-      transition: color 0.2s ease;
-    }
-
-    .login-link:hover {
-      color: var(--ig-primary);
-    }
-
-    .links {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      margin-top: 24px;
-    }
-
-    .links a {
-      color: var(--ig-secondary-text);
+    
+    .divider-text {
+      padding: 0 16px;
+      color: #8e8e8e;
       font-size: 13px;
-      text-decoration: none;
-      margin: 8px;
-      transition: color 0.2s ease;
-    }
-
-    .links a:hover {
-      color: var(--ig-text);
-    }
-
-    .success-message {
-      display: none;
-      background-color: rgba(52, 168, 83, 0.1);
-      border-radius: var(--github-radius);
-      padding: 20px;
-      margin-top: 24px;
-      animation: fadeIn 0.5s;
-      width: 100%;
-      border-left: 4px solid #34a853;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .success-icon {
-      color: #34a853;
-      font-size: 20px;
-      margin-right: 8px;
-      vertical-align: middle;
-    }
-
-    .success-title {
       font-weight: 600;
-      margin-bottom: 8px;
-      color: #34a853;
     }
-
-    .instagram-gradient {
-      background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
-      font-size: 48px;
-      font-family: 'Instagram', sans-serif;
-      font-weight: bold;
+    
+    .create-account {
+      text-align: center;
+      font-weight: 600;
+    }
+    
+    .create-account a {
+      color: #262626;
+      text-decoration: none;
+    }
+    
+    .back-to-login {
+      text-align: center;
+    }
+    
+    .back-to-login a {
+      color: #0095f6;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    
+    .message {
+      margin-bottom: 16px;
+      padding: 8px;
+      border-radius: 4px;
+      text-align: center;
+    }
+    
+    .message.error {
+      background-color: #ffebee;
+      color: #c62828;
+    }
+    
+    .message.success {
+      background-color: #e8f5e9;
+      color: #2e7d32;
+    }
+    
+    .spinner {
+      display: inline-block;
+      width: 12px;
+      height: 12px;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      border-top-color: #fff;
+      animation: spin 1s ease-in-out infinite;
+      margin-right: 8px;
+    }
+    
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+    
+    footer {
+      width: 100%;
+      padding: 24px 0;
+      text-align: center;
+      font-size: 12px;
+      color: #8e8e8e;
+      border-top: 1px solid #dbdbdb;
+    }
+    
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
       margin-bottom: 16px;
     }
-
-    .credits-container {
-      display: flex;
-      justify-content: center;
-      margin-top: 30px;
-    }
-
-    .credits {
-      font-size: 14px;
-      color: #fff;
-      text-align: center;
-      font-weight: bold;
-      padding: 10px 20px;
-      border-radius: var(--github-radius);
-      background: rgba(0, 0, 0, 0.8);
-      position: relative;
-      overflow: hidden;
+    
+    .footer-links a {
+      color: #8e8e8e;
+      text-decoration: none;
+      margin: 0 8px;
+      text-transform: uppercase;
     }
     
-    .neon-text {
-      color: #fff;
-      text-shadow: 
-        0 0 5px var(--neon-color),
-        0 0 10px var(--neon-color),
-        0 0 20px var(--neon-color),
-        0 0 40px var(--neon-color);
-      animation: neon-glow 1.5s ease-in-out infinite alternate;
-    }
-    
-    @keyframes neon-glow {
-      from {
-        text-shadow: 
-          0 0 5px var(--neon-color),
-          0 0 10px var(--neon-color),
-          0 0 20px var(--neon-color),
-          0 0 30px var(--neon-color);
-      }
-      to {
-        text-shadow: 
-          0 0 10px var(--neon-color),
-          0 0 20px var(--neon-color),
-          0 0 30px var(--neon-color),
-          0 0 40px var(--neon-color);
-      }
-    }
-
     @media (max-width: 450px) {
       .card {
-        padding: 24px 20px;
+        border: none;
+        background: transparent;
+      }
+      
+      .main-content {
+        margin-top: 0;
       }
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <div class="card">
-      <div class="instagram-gradient">Instagram</div>
-      <div class="lock-icon">🔒</div>
-      <h1>Trouble logging in?</h1>
-      <p>Enter your email, phone, or username and we'll send you a link to get back into your account.</p>
-      
-      <form id="resetForm">
-        <div class="form-group">
-          <input type="text" id="emailOrUsername" placeholder="Email, Phone, or Username" required>
-          <div class="error-message" id="emailError">Please enter a valid email, phone number or username.</div>
-        </div>
-        
-        <button type="submit" id="resetButton">
-          <span id="buttonText">Send Login Link</span>
-          <span class="loader" id="loader"></span>
-        </button>
-        
-        <div class="or-divider">
-          <span>OR</span>
-        </div>
-        
-        <a href="https://www.facebook.com/signup" class="create-account" target="_blank">Create a Facebook account</a>
-      </form>
-      
-      <div class="success-message" id="successMessage">
-        <div class="success-title"><span class="success-icon">✓</span> Email Sent Successfully</div>
-        <p>We sent an email to your email address with a link to get back into your account.</p>
-      </div>
-    </div>
-    
-    <div class="card">
-      <a href="#" class="login-link">Back to Login</a>
-    </div>
-    
-    <div class="links">
-      <a href="#">About</a>
-      <a href="#">Blog</a>
-      <a href="#">Jobs</a>
-      <a href="#">Help</a>
-      <a href="#">Privacy</a>
-      <a href="#">Terms</a>
-    </div>
-    
-    <div class="credits-container">
-      <div class="credits">
-        <span class="neon-text">made by @2623 - Ali Al-sharif</span>
-      </div>
-    </div>
-  </div>
-
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const form = document.getElementById('resetForm');
-      const emailInput = document.getElementById('emailOrUsername');
-      const emailError = document.getElementById('emailError');
-      const resetButton = document.getElementById('resetButton');
-      const buttonText = document.getElementById('buttonText');
-      const loader = document.getElementById('loader');
-      const successMessage = document.getElementById('successMessage');
-
-      // Set button disabled by default
-      resetButton.disabled = true;
-
-      // Enable/disable button based on input
-      emailInput.addEventListener('input', function() {
-        resetButton.disabled = emailInput.value.trim() === '';
-        emailError.style.display = 'none';
-      });
-
-      // Form submission handling
-      form.addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        const value = emailInput.value.trim();
-        
-        // Basic validation
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        const phoneRegex = /^[0-9+\s()-]{7,20}$/;
-        const usernameRegex = /^[a-zA-Z0-9._]{1,30}$/;
-        
-        if (!emailRegex.test(value) && !phoneRegex.test(value) && !usernameRegex.test(value)) {
-          emailError.style.display = 'block';
-          return;
-        }
-        
-        // Show loading state
-        buttonText.style.opacity = '0';
-        loader.style.display = 'block';
-        resetButton.disabled = true;
-        
-        // Simulate API call
-        setTimeout(function() {
-          try {
-            // Mock API call to the Instagram password reset endpoint
-            fetch('https://i.instagram.com/api/v1/accounts/send_password_reset/', {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-              },
-              body: JSON.stringify({
-                user_email: value,
-                guid: generateGuid(),
+    <div class="main-content">
+      <div class="logo">
+        <svg aria-label="Instagram" fill="currentColor" height="29" role="img" viewBox="32 4 113 32" width="103">
+          <path clip-rule="evenodd" d="M37.82 4.11c-2.32.97-4.86 3.7-5.66 7.13-1.02 4.34 3.21 6.17 3.56 5.57.4-.7-.76-.94-1-3.2-.3-2.9 1.05-6.16 2.75-7.58.32-.27.3.1.3.78l-.06 14.46c0 3.1-.13 4.07-.36 5.04-.23.98-.6 1.64-.33 1.9.32.28 1.68-.4 2.46-1.5a8.13 8.13 0 0 0 1.33-4.58c.07-2.06.06-5.33.07-7.19 0-1.7.03-6.71-.03-9.72-.02-.74-2.07-1.51-3.03-1.1Zm82.13 14.48a9.42 9.42 0 0 1-.88 3.75c-.85 1.72-2.63 2.25-3.39-.22-.4-1.34-.43-3.59-.13-5.47.3-1.9 1.14-3.35 2.53-3.22 1.38.13 2.02 1.9 1.87 5.16ZM96.8 28.57c-.02 2.67-.44 5.01-1.34 5.7-1.29.96-3 .23-2.65-1.72.31-1.72 1.8-3.48 4-5.64l-.01 1.66Zm-.35-10a10.56 10.56 0 0 1-.88 3.77c-.85 1.72-2.64 2.25-3.39-.22-.5-1.69-.38-3.87-.13-5.25.33-1.78 1.12-3.44 2.53-3.44 1.38 0 2.06 1.5 1.87 5.14Zm-13.41-.02a9.54 9.54 0 0 1-.87 3.8c-.88 1.7-2.63 2.24-3.4-.23-.55-1.77-.36-4.2-.13-5.5.34-1.95 1.2-3.32 2.53-3.2 1.38.14 2.04 1.9 1.87 5.13Zm61.45 1.81c-.33 0-.49.35-.61.93-.44 2.02-.9 2.48-1.5 2.48-.66 0-1.26-1-1.42-3-.12-1.58-.1-4.48.06-7.37.03-.59-.14-1.17-1.73-1.75-.68-.25-1.68-.62-2.17.58a29.65 29.65 0 0 0-2.08 7.14c0 .06-.08.07-.1-.06-.07-.87-.26-2.46-.28-5.79 0-.65-.14-1.2-.86-1.65-.47-.3-1.88-.81-2.4-.2-.43.5-.94 1.87-1.47 3.48l-.74 2.2.01-4.88c0-.5-.34-.67-.45-.7a9.54 9.54 0 0 0-1.8-.37c-.48 0-.6.27-.6.67 0 .05-.08 4.65-.08 7.87v.46c-.27 1.48-1.14 3.49-2.09 3.49s-1.4-.84-1.4-4.68c0-2.24.07-3.21.1-4.83.02-.94.06-1.65.06-1.81-.01-.5-.87-.75-1.27-.85-.4-.09-.76-.13-1.03-.11-.4.02-.67.27-.67.62v.55a3.71 3.71 0 0 0-1.83-1.49c-1.44-.43-2.94-.05-4.07 1.53a9.31 9.31 0 0 0-1.66 4.73c-.16 1.5-.1 3.01.17 4.3-.33 1.44-.96 2.04-1.64 2.04-.99 0-1.7-1.62-1.62-4.4.06-1.84.42-3.13.82-4.99.17-.8.04-1.2-.31-1.6-.32-.37-1.03-.56-1.99-.33-.7.16-1.7.34-2.6.47 0 0 .05-.21.1-.6.23-2.03-1.98-1.87-2.69-1.22-.42.39-.7.84-.82 1.67-.17 1.3.9 1.91.9 1.91a22.22 22.22 0 0 1-3.4 7.23v-.7c-.01-3.36.03-6 .05-6.95.02-.94.06-1.63.06-1.8 0-.36-.22-.5-.66-.67-.4-.16-.86-.26-1.34-.3-.6-.05-.97.27-.96.65v.52a3.7 3.7 0 0 0-1.84-1.49c-1.44-.43-2.94-.05-4.07 1.53a10.1 10.1 0 0 0-1.66 4.72c-.15 1.57-.13 2.9.09 4.04-.23 1.13-.89 2.3-1.63 2.3-.95 0-1.5-.83-1.5-4.67 0-2.24.07-3.21.1-4.83.02-.94.06-1.65.06-1.81 0-.5-.87-.75-1.27-.85-.42-.1-.79-.13-1.06-.1-.37.02-.63.35-.63.6v.56a3.7 3.7 0 0 0-1.84-1.49c-1.44-.43-2.93-.04-4.07 1.53-.75 1.03-1.35 2.17-1.66 4.7a15.8 15.8 0 0 0-.12 2.04c-.3 1.81-1.61 3.9-2.68 3.9-.63 0-1.23-1.21-1.23-3.8 0-3.45.22-8.36.25-8.83l1.62-.03c.68 0 1.29.01 2.19-.04.45-.02.88-1.64.42-1.84-.21-.09-1.7-.17-2.3-.18-.5-.01-1.88-.11-1.88-.11s.13-3.26.16-3.6c.02-.3-.35-.44-.57-.53a7.77 7.77 0 0 0-1.53-.44c-.76-.15-1.1 0-1.17.64-.1.97-.15 3.82-.15 3.82-.56 0-2.47-.11-3.02-.11-.52 0-1.08 2.22-.36 2.25l3.2.09-.03 6.53v.47c-.53 2.73-2.37 4.2-2.37 4.2.4-1.8-.42-3.15-1.87-4.3-.54-.42-1.6-1.22-2.79-2.1 0 0 .69-.68 1.3-2.04.43-.96.45-2.06-.61-2.3-1.75-.41-3.2.87-3.63 2.25a2.61 2.61 0 0 0 .5 2.66l.15.19c-.4.76-.94 1.78-1.4 2.58-1.27 2.2-2.24 3.95-2.97 3.95-.58 0-.57-1.77-.57-3.43 0-1.43.1-3.58.19-5.8.03-.74-.34-1.16-.96-1.54a4.33 4.33 0 0 0-1.64-.69c-.7 0-2.7.1-4.6 5.57-.23.69-.7 1.94-.7 1.94l.04-6.57c0-.16-.08-.3-.27-.4a4.68 4.68 0 0 0-1.93-.54c-.36 0-.54.17-.54.5l-.07 10.3c0 .78.02 1.69.1 2.09.08.4.2.72.36.91.15.2.33.34.62.4.28.06 1.78.25 1.86-.32.1-.69.1-1.43.89-4.2 1.22-4.31 2.82-6.42 3.58-7.16.13-.14.28-.14.27.07l-.22 5.32c-.2.7.37 2.08.94 2.36.3.15.67.17.92.17.95 0 1.38-.31 1.76-.88.19-.29.82-2.44 1.4-4.74.38-1.5 1.25-3.3 1.84-4.48.13-.25.24-.23.24-.06l-.12 7.29c0 1.62.67 1.94 1.18 1.94.62 0 1.32-.3 1.68-.95.72-1.33.5-3.6.5-3.6.38.15 2.38 2.2 3.41 3.38.76.87 1.1 1.73 1.05 2.43-.06.69-.7 1.33-1.72 1.19-.35-.05-.74-.22-1.14-.43-.33-.16-1.13-.94-1.13-.94-.71.8-.95 1.64-1.12 2.2-.17.55 0 1.1.33 1.38.32.28 1.12.36 1.56.36.89 0 3.35-.21 4.92-3.26.17-.34.66-1.37.66-1.37L61.54 29c.63-.06 1.34-.1 2.22-.1 1.09 0 2.17.18 2.83.73.52.43.62 1.53.52 2.55-.08.85-.32 1.57-.5 1.95-.18.35-.38.7-.58.8a.54.54 0 0 1-.5.06c-.53-.17-1.07-.53-1.07-.53a6.07 6.07 0 0 0-.84-.2 4.2 4.2 0 0 0-.81-.06c-.63.03-1.5.77-1.75 1.34-.33.73-.2 1.5.37 1.95.49.38 2.12.75 3.63.62 2.51-.2 3.87-1.62 4.5-3.52.24-.72.38-2.13.38-2.13.56-.06 1.2-.15 1.78-.28 1.04-.23 1.38-.36 1.38-.36v-.01c.95-.17 1.74-.39 2.44-.62 0 0-.08 2.2.37 3.15.47.96 1.47 1.78 3.17 1.78 1.6 0 3.12-1.33 3.51-2.95.04-.21.04-.43.04-.65 0-.22-.02-.43-.04-.65-.01-.07-.03-.14-.04-.2l.03.03c.56-.95.76-1.68.93-2.1.24-.57 1.2-2.68 1.66-3.64.27-.55.47-.94.65-1.25.33.02.66.04.98.09 1.32.18 1.41.25 1.41.25.5.11.95-.23.99-.75.04-.52-.4-.85-.93-.95 0 0-.45-.11-1.6-.3-.35-.06-.74-.11-1.15-.15l.08-.16 2.43-4.65c.13-.25.19-.47-.06-.66-.25-.2-.67-.05-.79.1l-2.43 4.62-.27.51-.28.54c-.43-.02-.86-.04-1.28-.04-3.03 0-4.32 1.4-4.32 3.35 0 .83.24 1.27.24 1.27.16.3.38.46.62.55.2.08.43.11.68.11.53 0 1.07-.18 1.41-.49.72-.66.53-1.48.53-1.48-.03-.3-.03-.32.25-.32.22 0 .91-.14 1.72-.37.35-.1.7-.21 1.05-.34.01.67.2 1.5.98 2.28.8.8 1.96 1.16 3.55 1.1 1.29-.05 2.29-.4 3.07-.94.07.7.66 1.53 1.72 1.53.88 0 1.61-.62 1.65-1.38 0-.05.01-.13.01-.25 0-.12 0-.25-.02-.41 0 0 0-.09-.01-.23-.01-.14 0-.35 0-.35s.18.05.33.12c.15.07.31.15.47.2.16.05.27.01.35-.04.08-.05.14-.15.19-.3l.05-.13a.57.57 0 0 0 .04-.16c.01-.07 0-.13-.02-.19a.5.5 0 0 0-.17-.22c-.1-.08-.25-.14-.42-.2l-.29-.1c-.22-.08-.45-.17-.66-.28-.21-.1-.4-.21-.56-.35a.58.58 0 0 1-.19-.43c0-.15.07-.3.19-.45.11-.14.28-.27.47-.38.2-.11.45-.2.7-.28.26-.08.52-.12.78-.16.13-.01.26-.02.38-.02.13 0 .25 0 .37.02.1.01.22.04.31.06.1.03.19.06.28.1.18.08.35.17.51.3.16.12.3.28.38.47.08.2.08.42-.03.66-.11.23-.28.4-.43.5-.15.1-.3.17-.45.23-.15.06-.27.1-.35.12-.08.03-.13.04-.13.04 0 .03.05.1.13.14.07.05.16.08.25.11.1.03.19.05.3.05.1.01.2 0 .28-.02.08-.02.16-.03.23-.06a.7.7 0 0 0 .2-.1c.06-.04.12-.09.17-.14a1.97 1.97 0 0 0 .26-.32c.08-.12.15-.25.2-.4.06-.14.1-.3.12-.47.02-.17.03-.35 0-.54-.02-.2-.08-.39-.15-.58a1.82 1.82 0 0 0-.3-.51c-.12-.16-.26-.3-.4-.43-.15-.13-.32-.24-.48-.34a3.7 3.7 0 0 0-.57-.25 4 4 0 0 0-.63-.16 5.28 5.28 0 0 0-1.36-.08c-.23.02-.46.05-.7.1-.23.04-.47.1-.7.19-.44.17-.86.4-1.22.7-.18.15-.34.32-.48.5-.14.18-.25.38-.34.59-.09.2-.14.43-.14.66 0 .07 0 .14.02.21 0 .07.02.13.04.2.02.06.04.12.07.18.03.06.06.11.1.17.1.18.24.35.4.5.17.15.35.28.55.4.2.11.41.21.64.3.23.09.46.17.7.24.12.04.24.08.36.12.12.04.24.07.36.11.12.04.23.08.35.12.12.05.23.1.34.15.21.11.42.23.59.4.17.16.3.38.3.65 0 .28-.13.53-.32.74-.19.2-.44.36-.72.48-.28.12-.59.2-.9.25-.31.05-.61.07-.9.07-.3 0-.59-.03-.87-.1a2.92 2.92 0 0 1-.78-.3 1.84 1.84 0 0 1-.6-.56 1.7 1.7 0 0 1-.23-.88c0-.04 0-.08.02-.12 0-.04.01-.08.03-.12.01-.04.03-.08.05-.12l.07-.12c.1-.16.22-.3.37-.4.14-.1.3-.19.45-.26.16-.07.32-.12.46-.16.14-.04.27-.06.35-.08.1-.02.15-.03.15-.03l-.02-.02a.63.63 0 0 0-.2-.06 1.32 1.32 0 0 0-.3-.03c-.12 0-.25.01-.38.04-.13.03-.27.07-.4.13-.14.05-.27.12-.4.2-.13.09-.25.18-.36.3-.1.1-.2.22-.28.36-.08.14-.14.3-.18.47-.03.16-.05.34-.03.52.02.19.07.37.15.55.08.18.2.34.33.5.14.15.3.28.47.4.17.12.36.22.55.3.2.08.4.15.61.2.21.05.42.09.63.11.21.03.42.04.63.04.21 0 .42-.01.62-.04.2-.02.4-.06.59-.11a4.27 4.27 0 0 0 1.12-.48c.17-.1.33-.22.48-.35.15-.13.28-.28.4-.43.11-.15.2-.32.28-.5.07-.18.12-.37.14-.57.01-.1.02-.2.02-.3 0-.1-.01-.2-.03-.3-.02-.1-.05-.2-.08-.3-.04-.09-.08-.19-.13-.28a3.9 3.9 0 0 0-.36-.52 3.83 3.83 0 0 0-.47-.44 4.5 4.5 0 0 0-.56-.37 5.3 5.3 0 0 0-.65-.3 5.28 5.28 0 0 0-.68-.22 7.4 7.4 0 0 0-.68-.15c-.22-.04-.44-.08-.65-.11-.21-.03-.4-.06-.58-.09-.18-.03-.34-.06-.48-.09-.15-.03-.27-.06-.38-.09-.1-.03-.18-.06-.24-.08-.06-.03-.09-.05-.09-.05 0 0 .03-.03.08-.07.05-.04.12-.09.22-.15.1-.06.22-.12.36-.19.14-.07.3-.13.48-.19.09-.03.18-.05.27-.08.1-.02.2-.04.3-.05.1-.02.21-.03.32-.04.11 0 .22-.01.33 0 .23.01.47.04.7.09.22.05.44.13.63.24.19.1.36.24.48.4.13.17.21.37.23.6 0 .04.01.08.01.12v.13c0 .04-.01.08-.02.12 0 .04-.01.08-.02.12-.05.15-.11.3-.2.43-.08.13-.18.24-.3.34-.11.1-.24.18-.38.25-.14.07-.29.12-.44.16-.08.02-.16.04-.24.05l-.24.03c-.08.01-.16.02-.24.02-.08 0-.16 0-.24-.01-.08 0-.16-.01-.24-.03a.87.87 0 0 1-.23-.05.72.72 0 0 1-.21-.1.59.59 0 0 1-.18-.17.65.65 0 0 1-.12-.27.7.7 0 0 1 .01-.32c.03-.1.07-.2.13-.28.06-.08.13-.15.2-.2.08-.06.16-.1.24-.14.08-.04.16-.06.24-.08.08-.02.15-.03.22-.04.07 0 .13 0 .18 0 .05 0 .09 0 .12.02.03 0 .04.01.04.01 0 0-.01-.03-.05-.06a.44.44 0 0 0-.14-.07.93.93 0 0 0-.22-.04 1.32 1.32 0 0 0-.3 0c-.11.01-.23.03-.34.07-.12.03-.23.08-.34.14-.11.06-.21.13-.3.22-.09.08-.17.18-.24.3a1.2 1.2 0 0 0-.14.4c-.03.14-.03.3 0 .45.02.16.07.31.14.45.07.14.16.27.27.38.11.11.23.2.37.28.13.08.28.14.43.19.15.05.3.08.47.1.16.03.32.04.48.04.16 0 .32 0 .48-.02.16-.01.31-.03.46-.06.15-.03.3-.07.44-.11.14-.05.28-.1.4-.16.13-.06.25-.13.36-.2.11-.08.21-.16.3-.25.09-.09.17-.18.24-.28.07-.1.13-.2.17-.31.05-.11.08-.22.1-.34.03-.12.04-.24.04-.36 0-.12-.01-.24-.03-.36a2.42 2.42 0 0 0-.08-.35 2.41 2.41 0 0 0-.14-.33 2.36 2.36 0 0 0-.18-.31 2.8 2.8 0 0 0-.23-.29c-.08-.1-.17-.18-.26-.26-.09-.08-.19-.15-.29-.22a3.93 3.93 0 0 0-.32-.18 4.13 4.13 0 0 0-.34-.15 4.33 4.33 0 0 0-.36-.12 6.28 6.28 0 0 0-.76-.18 9.34 9.34 0 0 0-.78-.1c-.26-.03-.52-.04-.77-.05-.25 0-.5 0-.74.02-.24.01-.47.04-.7.07-.22.03-.44.07-.64.12-.2.05-.4.1-.58.17-.18.06-.35.13-.51.21-.16.08-.31.16-.45.25-.14.09-.27.18-.39.28-.12.1-.23.2-.33.31-.1.11-.19.22-.27.34-.08.12-.15.24-.2.37-.06.13-.1.26-.14.4-.03.13-.05.27-.06.4-.01.14-.01.28 0 .42.01.14.03.27.06.4.03.13.07.26.12.38.05.12.1.24.17.35.06.11.14.22.22.32.08.1.17.2.26.28.1.09.2.17.3.24.11.07.22.14.34.2.12.06.24.11.36.16.13.05.26.09.39.12.13.03.27.06.4.08.14.02.28.04.42.05.14.01.28.02.42
